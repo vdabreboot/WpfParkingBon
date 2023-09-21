@@ -1,0 +1,91 @@
+﻿<Window x:Class="ParkingBon.ParkingBonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:custom="clr-namespace:ParkingBon"
+        Title="Parking Bon" Height="379" Width="525" Closing="Window_Closing">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="NewExecuted"></CommandBinding>
+        <CommandBinding Command="Open" Executed="openExecuted"></CommandBinding>
+        <CommandBinding Command="Save" Executed="saveExecuted"></CommandBinding>
+        <CommandBinding Command="PrintPreview" Executed="printPreviewExecuted"></CommandBinding>
+        <CommandBinding Command="Close" Executed="closeExecuted"></CommandBinding>
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu Name="MenuBalk" Height="24" DockPanel.Dock="Top">
+            <MenuItem Name="MenuOperaties" Header="Bon operaties">
+                <MenuItem Name="bonNieuw" Header="Nieuwe bo_n" InputGestureText="Ctrl+N"></MenuItem>
+                <MenuItem Name="BonOpenen" Header="Bon _openen" Command="Open"></MenuItem>
+                <MenuItem Name="BonOpslaaan" Header="Bon _opslaan" Command="Save"></MenuItem>
+                <MenuItem Name="BonAfdrukken" Header="Bon afdrukken" Command="PrintPreview"></MenuItem>
+                <MenuItem Name="splitter"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Name="Afsluiten" Header="Afsluiten" Command="Close"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Height="65" DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Name="NewButton" Click="nieuwAction">
+                    <StackPanel  Orientation="Vertical">
+                        <Image Height="40" Width="40" Source="pack://Application:,,,/Images/new.jpg"></Image>
+                        <Label>Nieuw</Label>
+                    </StackPanel>
+                </Button>
+                <Button Name="OpenButton" Command="Open">
+                    <StackPanel  Orientation="Vertical">
+                        <Image Height="40" Width="40" Source="pack://Application:,,,/Images/open.jpg"></Image>
+                        <Label>Openen</Label>
+                    </StackPanel>
+                </Button>
+                <Button Name="SaveButton" Command="Save">
+                    <StackPanel  Orientation="Vertical">
+                        <Image Height="40" Width="40" Source="pack://Application:,,,/Images/save.jpg"></Image>
+                        <Label>Opslaan</Label>
+                    </StackPanel>
+                </Button>
+                <Button Name="PrintPreviewButton" Command="PrintPreview">
+                    <StackPanel  Orientation="Vertical">
+                        <Image Height="40" Width="40" Source="pack://Application:,,,/Images/print.jpg"></Image>
+                        <Label>Afdrukvoorbeeld</Label>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnafsluiten" Command="Close" Click="btnafsluiten_Click">
+                    <StackPanel  Orientation="Vertical">
+                        <Image Height="40" Width="40" Source="pack://Application:,,,/Images/close.jpg"></Image>
+                        <Label>Afsluiten</Label>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Name="StatusItem"></StatusBarItem>
+        </StatusBar>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Name="logoImage" Source="images\parkingbon.jpg" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" Margin="10,0"></Image>
+            <TextBlock Text="1€ per half uur tot 22.00u" FontWeight="Bold"></TextBlock>
+            <DatePicker Name="DatumBon" Grid.Column="1" ToolTip="datum selectere" SelectedDateFormat="Long" VerticalAlignment="Center" Margin="0,38,50,38"></DatePicker>
+            <Label Name="AankomstLabel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Content="Aankomsttijd:"></Label>
+            <Label Name="AankomstLabelTijd" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="200" HorizontalContentAlignment="Center"></Label>
+            <Label Name="BedragLabel" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Content="Bedrag:"></Label>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                <RepeatButton Margin="20,0"  Name="minder" Width="20" Content="-" FontSize="14" FontWeight="ExtraBold" Click="minder_Click"></RepeatButton>
+                <Label Name="TeBetalenLabel" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Width="100" Content="0 €"></Label>
+                <RepeatButton Margin="20,0"  Name="meer" HorizontalAlignment="Center" Width="20" Content="+" FontSize="14" FontWeight="ExtraBold" Click="meer_Click"></RepeatButton>
+            </StackPanel>
+            <Label Name="VertrekLabel" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Content="Vertrektijd:"></Label>
+            <Label Name="VertrekLabelTijd" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Width="200" HorizontalContentAlignment="Center"></Label>
+        </Grid>
+    </DockPanel>
+</Window>
